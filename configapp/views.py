@@ -1,9 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-# Create your views here.
-def salom(request):
-    return HttpResponse("Salom")
+from configapp.models import Product, Supplier
 
-def dunyo(request):
-    return HttpResponse("dars1 uchun mahsus ")
+
+# Create your views here.
+def index(request):
+    product = Product.objects.all()
+    supplier = Supplier.objects.all()
+    context = {
+        'product': product,
+        'title': 'Products',
+        'supplier': supplier,
+    }
+    return render(request,'index.html',context)
